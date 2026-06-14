@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Parking Management System</title>
+    <title>Parking Management System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <h1>Parking Management System</h1>
-<p>My First CRUD Project</p>
+
+<input type="text" id="vehicleNo" placeholder="Vehicle Number">
+<input type="text" id="ownerName" placeholder="Owner Name">
+
+<button onclick="addVehicle()">Add Vehicle</button>
+
+<table border="1">
+<tr>
+<th>Vehicle No</th>
+<th>Owner Name</th>
+<th>Actions</th>
+</tr>
+<tbody id="tableBody"></tbody>
+</table>
+
+<script src="script.js"></script>
+
 </body>
 </html>

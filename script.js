@@ -1,26 +1,65 @@
-body{
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 30px;
+let vehicles = [];
+
+function addVehicle() {
+
+    let vehicleNo = document.getElementById("vehicleNo").value;
+    let ownerName = document.getElementById("ownerName").value;
+
+    if(vehicleNo === "" || ownerName === ""){
+        alert("Fill all fields");
+        return;
+    }
+
+    vehicles.push({
+        vehicleNo,
+        ownerName
+    });
+
+    document.getElementById("vehicleNo").value = "";
+    document.getElementById("ownerName").value = "";
+
+    displayVehicles();
 }
 
-input{
-    padding: 8px;
-    margin: 5px;
+function displayVehicles() {
+
+    let tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    vehicles.forEach((vehicle,index)=>{
+
+        tableBody.innerHTML += `
+        <tr>
+            <td>${vehicle.vehicleNo}</td>
+            <td>${vehicle.ownerName}</td>
+            <td>
+                <button onclick="editVehicle(${index})">Edit</button>
+                <button onclick="deleteVehicle(${index})">Delete</button>
+            </td>
+        </tr>`;
+    });
 }
 
-button{
-    padding: 8px 12px;
-    margin: 5px;
+function editVehicle(index){
+
+    let newVehicleNo = prompt(
+        "Enter New Vehicle Number",
+        vehicles[index].vehicleNo
+    );
+
+    let newOwnerName = prompt(
+        "Enter New Owner Name",
+        vehicles[index].ownerName
+    );
+
+    if(newVehicleNo && newOwnerName){
+        vehicles[index].vehicleNo = newVehicleNo;
+        vehicles[index].ownerName = newOwnerName;
+        displayVehicles();
+    }
 }
 
-table{
-    margin: 20px auto;
-    border-collapse: collapse;
-    width: 70%;
-}
-
-th, td{
-    border: 1px solid black;
-    padding: 10px;
+function deleteVehicle(index){
+    vehicles.splice(index,1);
+    displayVehicles();
 }
